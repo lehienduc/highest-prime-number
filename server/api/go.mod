@@ -1,6 +1,6 @@
-module main
+module api
 
-replace stably.io/numbers => ./numbers
+replace stably.io/numbers => ../numbers
 
 go 1.15
 
