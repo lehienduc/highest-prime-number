@@ -2,9 +2,7 @@ package numbers
 
 import "errors"
 
-/*
-HighestPrime aa
-*/
+// FindHighestPrime find highest prime number of input number
 func FindHighestPrime(number int) (int, error) {
 	if number < 0 {
 		return number, errors.New("Invalid input")

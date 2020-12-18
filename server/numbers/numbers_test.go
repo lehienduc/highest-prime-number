@@ -5,8 +5,8 @@ import (
 )
 
 func TestHighestPrimeNumber(t *testing.T) {
-	input := 10
-	want := 7
+	input := 100
+	want := 97
 	result, err := FindHighestPrime(input)
 	if want != result || err != nil {
 		t.Fatalf("Test fail")
