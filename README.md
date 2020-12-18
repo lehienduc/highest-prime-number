@@ -19,6 +19,14 @@ The system will automatically scale.
 
 To access frontend UI, go to browse to localhost:9090
 
+To test the API server, call
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"number":100}' \  
+  http://localhost:9000/
+
+Replace 100 by the value you want to test
+
 # TODO
 
 Backend, Go service
