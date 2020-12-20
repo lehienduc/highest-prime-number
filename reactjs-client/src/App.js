@@ -6,30 +6,55 @@ import axios from 'axios'
 import { Form, Col, Button } from 'react-bootstrap';
 
 function App() {
-  const [number, setNumber] = useState(null);
-  const [result, setResult] = useState(null);
+  const [number, setNumber] = useState("");
+  const [result, setResult] = useState("");
+  const [validated, setValidated] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
+    setValidated(true);
+
     const apiUrl = `http://localhost:9000/`;
 
     axios.post(apiUrl, {
       "number": Number(number)
-    }).then((res) => {
+    }).then(res => {
       setResult(res.data);
+    }).catch(err => {
+      // handle error
+      console.log('err', err);
     });
+  }
+
+  const handleNumberChange = (e) => {
+    if(parseInt(e.target.value)){
+      setValidated(true);
+    } else {
+      setValidated(false);
+    }
+    setNumber(e.target.value);
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="mb-4">Find highest prime number</h1>
-        <Form onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} controlId="formGridNumber">
               <Form.Label>Number</Form.Label>
-              <Form.Control type="number" placeholder="Enter number" value={number}
-              onChange={(e) => setNumber(e.target.value)}/>
+              <Form.Control type="number" inputMode="numeric" placeholder="Enter number" value={number}
+              onChange={handleNumberChange} required/>
+              <Form.Control.Feedback type="invalid">
+              Please enter a number.
+            </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridResult">
@@ -37,7 +62,7 @@ function App() {
               <Form.Control type="text" readOnly value={result}/>
             </Form.Group>
           </Form.Row>
-          <Button size="lg" variant="primary" type="submit" block>
+          <Button size="lg" variant="primary" type="submit" block disabled={!validated}>
             Submit
           </Button>
         </Form>

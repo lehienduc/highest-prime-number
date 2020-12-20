@@ -35,8 +35,12 @@ func handleRequests(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, _ := numbers.FindHighestPrime(input.Number)
-	io.WriteString(w, strconv.Itoa(result))
+	result, error := numbers.FindHighestPrime(input.Number)
+	if error != nil {
+		http.Error(w, error.Error(), http.StatusBadRequest)
+	} else {
+		io.WriteString(w, strconv.Itoa(result))
+	}
 }
 
 func main() {

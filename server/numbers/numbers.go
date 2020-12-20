@@ -4,7 +4,7 @@ import "errors"
 
 // FindHighestPrime find highest prime number of input number
 func FindHighestPrime(number int) (int, error) {
-	if number < 0 {
+	if number < 2 {
 		return number, errors.New("Invalid input")
 	}
 	result := number
