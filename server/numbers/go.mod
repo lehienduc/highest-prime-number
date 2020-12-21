@@ -1,3 +1,3 @@
-module stably.io/numbers
+module ducle.candidate/numbers
 
 go 1.15

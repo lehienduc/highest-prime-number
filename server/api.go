@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"stably.io/numbers"
+	"ducle.candidate/numbers"
 )
 
 // NumberInput input value from user
